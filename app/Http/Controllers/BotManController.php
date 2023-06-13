@@ -66,7 +66,7 @@ class BotManController extends Controller
                                             $this->say('Tanggal : ' . $checkPresensi->tanggal . PHP_EOL . 'NIP : ' . $nip . PHP_EOL . 'Nama : ' . $checkNIP->nama . PHP_EOL . 'Jam Masuk : ' . Carbon::parse($checkPresensi->jam_masuk)->format('H:i') . PHP_EOL . 'Jam Pulang : ' . Carbon::parse($checkPresensi->jam_pulang)->format('H:i') . PHP_EOL . 'Telat : ' . ($checkPresensi->terlambat == null ? 0 . ' Menit' : $checkPresensi->terlambat . ' Menit') . PHP_EOL . 'Lebih Awal : ' . ($checkPresensi->lebih_awal == null ? 0  . ' Menit' : $checkPresensi->lebih_awal . ' Menit'));
                                         } elseif ($jawab == "PULANG" || $jawab == "pulang") {
                                             $checkPresensi->update([
-                                                'jam_pulang' => $checkPresensi->tanggal . ' 07:' . rand(20, 30) . ':' . rand(1, 60),
+                                                'jam_pulang' => $checkPresensi->tanggal . ' 17:' . rand(01, 30) . ':' . rand(1, 60),
                                                 'lebih_awal' => 0,
                                             ]);
                                             $this->say('Berhasil Di Update, Berikut Data Terbaru : ');
