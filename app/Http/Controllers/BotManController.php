@@ -65,10 +65,17 @@ class BotManController extends Controller
                                             $this->say('Berhasil Di Update, Berikut Data Terbaru : ');
                                             $this->say('Tanggal : ' . $checkPresensi->tanggal . PHP_EOL . 'NIP : ' . $nip . PHP_EOL . 'Nama : ' . $checkNIP->nama . PHP_EOL . 'Jam Masuk : ' . Carbon::parse($checkPresensi->jam_masuk)->format('H:i') . PHP_EOL . 'Jam Pulang : ' . Carbon::parse($checkPresensi->jam_pulang)->format('H:i') . PHP_EOL . 'Telat : ' . ($checkPresensi->terlambat == null ? 0 . ' Menit' : $checkPresensi->terlambat . ' Menit') . PHP_EOL . 'Lebih Awal : ' . ($checkPresensi->lebih_awal == null ? 0  . ' Menit' : $checkPresensi->lebih_awal . ' Menit'));
                                         } elseif ($jawab == "PULANG" || $jawab == "pulang" || $jawab == "Pulang") {
-                                            $checkPresensi->update([
-                                                'jam_pulang' => $checkPresensi->tanggal . ' 17:' . rand(01, 30) . ':' . rand(1, 60),
-                                                'lebih_awal' => 0,
-                                            ]);
+                                            if (Carbon::parse($checkPresensi->tanggal)->translatedFormat('l') == 'jumat') {
+                                                $checkPresensi->update([
+                                                    'jam_pulang' => $checkPresensi->tanggal . ' 11:' . rand(01, 30) . ':' . rand(1, 60),
+                                                    'lebih_awal' => 0,
+                                                ]);
+                                            } else {
+                                                $checkPresensi->update([
+                                                    'jam_pulang' => $checkPresensi->tanggal . ' 17:' . rand(01, 30) . ':' . rand(1, 60),
+                                                    'lebih_awal' => 0,
+                                                ]);
+                                            }
                                             $this->say('Berhasil Di Update, Berikut Data Terbaru : ');
                                             $this->say('Tanggal : ' . $checkPresensi->tanggal . PHP_EOL . 'NIP : ' . $nip . PHP_EOL . 'Nama : ' . $checkNIP->nama . PHP_EOL . 'Jam Masuk : ' . Carbon::parse($checkPresensi->jam_masuk)->format('H:i') . PHP_EOL . 'Jam Pulang : ' . Carbon::parse($checkPresensi->jam_pulang)->format('H:i') . PHP_EOL . 'Telat : ' . ($checkPresensi->terlambat == null ? 0 . ' Menit' : $checkPresensi->terlambat . ' Menit') . PHP_EOL . 'Lebih Awal : ' . ($checkPresensi->lebih_awal == null ? 0  . ' Menit' : $checkPresensi->lebih_awal . ' Menit'));
                                         } else {
